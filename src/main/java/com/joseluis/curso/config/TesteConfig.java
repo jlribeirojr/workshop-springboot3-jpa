@@ -4,6 +4,7 @@ package com.joseluis.curso.config;
 import java.time.Instant;
 import java.util.Arrays;
 
+import org.aspectj.weaver.NewConstructorTypeMunger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Profile;
 import com.joseluis.curso.entities.Category;
 import com.joseluis.curso.entities.Order;
 import com.joseluis.curso.entities.OrderItem;
+import com.joseluis.curso.entities.Payment;
 import com.joseluis.curso.entities.Product;
 import com.joseluis.curso.entities.User;
 import com.joseluis.curso.entities.enums.OrderStatus;
@@ -84,6 +86,10 @@ public class TesteConfig implements CommandLineRunner {
 		
 		orderItemrepository.saveAll(Arrays.asList(oi1, oi2, oi3));
 		
+		Payment pay1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+		o1.setPayment(pay1);
+		
+		orderRepository.save(o1);
 	}
 	
 }
